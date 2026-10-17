@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<h1>Hi {{ request.user.username }}</h1>
+
+    <div class="menu">
+
+        <a href="{% url 'signout' %}">Signout</a>
+
+        <a href="{% url 'add_password' %}">Parol qo'shish</a>
+
+
+    </div>
+
+{% for p in passwords%}
+
+    <div class="box">
+        <h1>{{ p.website_name }}</h1>
+        <a href="{{ p.link }}">Link</a>
+        <input type="password" value="{{ p.app_password }}">
+        <a href="{% url 'edit_password' p.id %}">Tahrirlash</a>
+        <a href="{% url 'delete_password' p.id %}">O`chirish</a>
+    </div>
+
+{% empty %}
+
+    <h1 class="no_password">
+        Hozircha parol saqlamagansiz!
+    </h1>
+
+{% endfor %}
+
+
+
+{% endblock %}
